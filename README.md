@@ -17,3 +17,14 @@ to your local setup (for example `mysql://root:@localhost/llama`)
 You should see "Welcome to zend-expressive" page with "no users in database" message at the bottom
 
 Now try to add an entry to database table `users` and refresh main page - it should show user you have added at the bottom of the page.
+
+
+#Project scheme / assumptions:
+- public directory is a directory that should be served by a webserver (apache vhost, etc.)
+
+Store in this directory all images, CSS stylesheets and javascript files
+- templates - Views in MVC terminology - twig templates containing HTML
+
+- src/App/Entity - Models in MVC terminology - every db table should have it's own class in this directory
+
+- src/App/Handler - Controllers in MVC terminology
