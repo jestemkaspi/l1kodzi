@@ -1,5 +1,6 @@
 #llama
 ###To setup project remember to:
+- run `composer install` command (and run it every time someone installs a new library)
 - create new database in mysql (for example `llama`) using phpmyadmin or any other mysql tool
 - copy llama/config/autoload/doctrine.local.php.dist to llama/config/autoload/doctrine.local.php
 - in copied file change this line:
