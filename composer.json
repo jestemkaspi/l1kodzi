@@ -1,0 +1,21 @@
+{
+  "name": "l1kodzi/llama",
+  "description": "description_text",
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Piotr Kasperski",
+      "email": "kspp@viessmann.io"
+    },
+    {
+      "name": "XXX XXX",
+      "email": "xxxx@viessmann.io"
+    }
+  ],
+  "require": {
+    "twig/twig": "3.x-dev",
+    "doctrine/orm": "3.0.x-dev"
+  }
+}
