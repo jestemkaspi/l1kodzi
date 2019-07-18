@@ -29,3 +29,10 @@ Store in this directory all images, CSS stylesheets and javascript files
 - src/App/Entity - Models in MVC terminology - every db table should have it's own class in this directory
 
 - src/App/Handler - Controllers in MVC terminology
+
+
+# Useful commands:
+- update database schema: 
+
+`vendor\bin\doctrine.bat orm:schema-tool:update --dump-sql` - check output sql
+`vendor\bin\doctrine.bat orm:schema-tool:update --force` - apply changes
