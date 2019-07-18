@@ -41,7 +41,6 @@
         "php": "^7.1",
         "dasprid/container-interop-doctrine": "^1.1",
         "ocramius/package-versions": "^1.5",
-        "zendframework/zend-component-installer": "^2.1.1",
         "zendframework/zend-config-aggregator": "^1.0",
         "zendframework/zend-diactoros": "^1.7.1 || ^2.0",
         "zendframework/zend-expressive": "^3.0.1",
@@ -53,11 +52,12 @@
         "zfcampus/zf-development-mode": "^3.2"
     },
     "require-dev": {
+        "filp/whoops": "^2.1.12",
         "phpunit/phpunit": "^7.0.1",
         "roave/security-advisories": "dev-master",
         "squizlabs/php_codesniffer": "^2.9.1",
-        "zendframework/zend-expressive-tooling": "^1.0",
-        "filp/whoops": "^2.1.12"
+        "zendframework/zend-component-installer": "^2.1",
+        "zendframework/zend-expressive-tooling": "^1.0"
     },
     "autoload": {
         "psr-4": {
