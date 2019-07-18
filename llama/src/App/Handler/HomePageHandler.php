@@ -109,7 +109,7 @@ class HomePageHandler implements RequestHandlerInterface
 
         $rankingRepository = $this->entityManager->getRepository('App\Entity\Ranking');
 
-        $data['ranking'] = $usersRepository->findAll();
+        $data['rankings'] = $rankingRepository->findAll();
 
         return new HtmlResponse($this->template->render('app::home-page', $data));
 
