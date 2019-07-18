@@ -127,4 +127,13 @@
             {% endfor %}
         {% endif %}
     </ul>
+    <ul>
+        {% if ranking is empty %}
+            <li>no rankings in database</li>
+        {% else %}
+            {% for ranking in rankings %}
+                <li>{{ ranking.points }}</li>
+            {% endfor %}
+        {% endif %}
+    </ul>
 {% endblock %}

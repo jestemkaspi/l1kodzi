@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Handler;
 
+use App\Entity\Ranking;
 use Doctrine\ORM\EntityManager;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -106,6 +107,12 @@ class HomePageHandler implements RequestHandlerInterface
 
         $data['users'] = $usersRepository->findAll();
 
+        $rankingRepository = $this->entityManager->getRepository('App\Entity\Ranking');
+
+        $data['ranking'] = $usersRepository->findAll();
+
         return new HtmlResponse($this->template->render('app::home-page', $data));
+
+
     }
 }
