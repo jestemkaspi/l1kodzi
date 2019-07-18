@@ -4,7 +4,7 @@ return [
         'connection' => [
             'orm_default' => [
                 'params' => [
-                    'url' => 'mysql://root:@localhost/llama',
+                    'url' => 'mysql://username:password@localhost/database',
                 ],
             ],
         ],
