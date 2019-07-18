@@ -1,3 +1,6 @@
 .idea
-vendor/*
-composer.lock
+composer.phar
+llama/clover.xml
+llama/coveralls-upload.json
+llama/phpunit.xml
+llama/vendor/
