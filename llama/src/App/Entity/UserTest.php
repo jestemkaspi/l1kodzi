@@ -1,16 +1,23 @@
 <?php
 
-include 'User.php';
+use App\Entity\User;
 use PHPUnit\Framework\TestCase;
 
-
-class DeleteThisLaterSEWPTest extends TestCase
+class UserTest extends TestCase
 {
-    public function simpleTest()
+    protected $User;
+
+    public function setUp()
     {
-        $this->showMe();
+        $this->User = new User();
     }
+
+    public function testCalculationOfMean()
+    {
+        $numbers = [3, 7, 6, 1, 5];
+        $this->assertEquals(4.4, $this->User->mean($numbers));
+        print'PHPUnitTest -> testCalculationOfMean ->  funkcja';
+    }
+
 }
 
-// test branch
-// test2

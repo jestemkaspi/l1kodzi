@@ -90,21 +90,10 @@ class User
         $this->avatar = $avatar;
     }
 
-}
 
-// ////////////////////////////////////////////////////////////////////////
-
-class DeleteThisLaterSEWP
-{
-    public function showMe()
+    //////////////
+    public function mean(array $numbers)
     {
-        return "testujemy";
+        return array_sum($numbers) / count($numbers);
     }
-};
-
-$testClass = new DeleteThisLaterSEWP();
-
-$testClass->showMe();
-
-
-
+}
