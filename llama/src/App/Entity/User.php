@@ -91,3 +91,20 @@ class User
     }
 
 }
+
+// ////////////////////////////////////////////////////////////////////////
+
+class DeleteThisLaterSEWP
+{
+    public function showMe()
+    {
+        return "testujemy";
+    }
+};
+
+$testClass = new DeleteThisLaterSEWP();
+
+$testClass->showMe();
+
+
+
