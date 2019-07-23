@@ -12,6 +12,11 @@ class UserTest extends TestCase
         $this->User = new User();
     }
 
+//    public function testLoginIfString()
+//    {
+//    $this->assertIsString($this->User->getLogin());
+//    }
+
     public function testCalculationOfMean()
     {
         $numbers = [3, 7, 6, 1, 5];
