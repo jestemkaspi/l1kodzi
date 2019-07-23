@@ -21,55 +21,32 @@ class User
      */
     protected $id;
 
-    /** @Column(type="string") * */
-    protected $login;
-
-    /** @Column(type="string") * */
-    protected $password;
-
-    /** @Column(type="string") * */
-    protected $avatar;
-
-    /** @Column(type="string") * */
-    protected $email;
-
-
-    /** @Column(type="datetime") * */
-    protected $registration_date;
-
     public function getId()
     {
         return $this->id;
     }
+
+
+    /** @Column(type="string") * */
+    protected $login;
 
     public function getLogin()
     {
         return $this->login;
     }
 
-    public function getPassword()
-    {
-        return $this->password;
-    }
-
-    public function getAvatar()
-    {
-        return $this->avatar;
-    }
-
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    public function getRegistration_date()
-    {
-        return $this->registration_date;
-    }
-
     public function setLogin($login)
     {
         $this->login = $login;
+    }
+
+
+    /** @Column(type="string") * */
+    protected $password;
+
+    public function getPassword()
+    {
+        return $this->password;
     }
 
     public function setPassword($password)
@@ -78,10 +55,13 @@ class User
         $this->password = $password;
     }
 
-    public function setEmail($email)
+
+    /** @Column(type="string") * */
+    protected $avatar;
+
+    public function getAvatar()
     {
-        // check if there is '@'
-        $this->email = $email;
+        return $this->avatar;
     }
 
     public function setAvatar($avatar)
@@ -91,7 +71,30 @@ class User
     }
 
 
-    //////////////
+    /** @Column(type="string") * */
+    protected $email;
+
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    public function setEmail($email)
+    {
+        // check if there is '@'
+        $this->email = $email;
+    }
+
+
+    /** @Column(type="datetime") * */
+    protected $registration_date;
+
+    public function getRegistration_date()
+    {
+        return $this->registration_date;
+    }
+
+    ////////////// testing
     public function mean(array $numbers)
     {
         return array_sum($numbers) / count($numbers);
