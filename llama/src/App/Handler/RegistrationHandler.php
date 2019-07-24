@@ -90,7 +90,7 @@ if (isset($_POST['signup - btn'])) {
   $this->entityManager
 $usersRepository = $this->entityManager->getRepository('App\Entity\User');
 
-        $data['users'] = $usersRepository->
+        $data['users'] = $usersRepository->find
 
 
 
