@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping\Id;
 use Doctrine\ORM\Mapping\Table;
+use mysql_xdevapi\Exception;
 
 /**
  * @Entity
@@ -15,6 +16,7 @@ use Doctrine\ORM\Mapping\Table;
  **/
 class User
 {
+
     /** @Id
      * @Column(type="integer")
      * @GeneratedValue *
@@ -32,11 +34,17 @@ class User
 
     public function getLogin()
     {
+
         return $this->login;
     }
 
     public function setLogin($login)
     {
+        $type_login = gettype($login);
+        if ($type_login = !'string') {
+            throw new Exception("Type must be string");
+        }
+
         $this->login = $login;
     }
 
@@ -52,6 +60,11 @@ class User
     public function setPassword($password)
     {
         // hashing, salt ?
+
+        $type_pwd = gettype($password);
+        if ($type_pwd = !'string') {
+            throw new Exception("Type must be string");
+        }
         $this->password = $password;
     }
 
@@ -66,6 +79,11 @@ class User
 
     public function setAvatar($avatar)
     {
+        $type_avatar = gettype();
+        if ($type_avatar = !'string') {
+            throw new Exception("Type must be string");
+        }
+
         // base_64?
         $this->avatar = $avatar;
     }
@@ -82,7 +100,13 @@ class User
     public function setEmail($email)
     {
         // check if there is '@'
-        $this->email = $email;
+
+        if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $this->email = $email;
+        } else {
+            throw new Exception("Use right email adress (with @ and .)");
+        }
+
     }
 
 

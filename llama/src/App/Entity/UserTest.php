@@ -14,7 +14,7 @@ class UserTest extends TestCase
 
 //    public function testLoginIfString()
 //    {
-//    $this->assertIsString($this->User->getLogin());
+//    $this->assertIsString($this->User->setLogin());
 //    }
 
     public function testCalculationOfMean()
