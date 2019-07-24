@@ -59,12 +59,12 @@ class User
 
     public function setPassword($password)
     {
+        // hashing, salt ?
+
         $type_pwd = gettype($password);
         if ($type_pwd = !'string') {
             throw new Exception("Type must be string");
         }
-
-        // hashing, salt ?
         $this->password = $password;
     }
 
