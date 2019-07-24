@@ -4,7 +4,11 @@ declare(strict_types=1);
 
 namespace App\Handler;
 
+use App\Entity\User;
 use Doctrine\ORM\EntityManager;
+use http\Exception\BadHeaderException;
+use JsonSchema\Exception\ValidationException;
+use PHPUnit\Runner\Exception;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
@@ -32,7 +36,7 @@ class RegistrationHandler implements RequestHandlerInterface
     public function __construct(
         string $containerName,
         Router\RouterInterface $router,
-        ?TemplateRendererInterface LoginHandler.php = null,
+        ?TemplateRendererInterface $template = null,
         EntityManager $entityManager
     ) {
         $this->containerName = $containerName;
@@ -41,115 +45,54 @@ class RegistrationHandler implements RequestHandlerInterface
         $this->entityManager = $entityManager;
     }
 
-    public function handle(ServerRequestInterface $request) : ResponseInterface
-
+    public function handle(ServerRequestInterface $request) : ResponseInterface //TODO: dwie osobne metody na wyswietlanie formularza i tworzenie uzytkownikow
     {
+        $_post = $request->getParsedBody();
+        try {
+            if (empty($_post['username'])) {
+                throw new \Exception("Username required");
+            }
+            if (!filter_var($_post['email'], FILTER_VALIDATE_EMAIL)) {
+                throw new \Exception("Email address is invalid");
+            }
+            if (empty($_post['email'])) {
+                throw new \Exception("Email required");
+            }
+            if (empty($_post['password'])) {
+                throw new \Exception("Password required");
+            }
+            if ($_post['password'] !== $_post['passwordConf']) {
+                throw new \Exception("The two password do not match");
+            }
 
-        $data = [];
+            // check if email exists
+            $usersRepository = $this->entityManager->getRepository('App\Entity\User');
+            $usersByEmail = $usersRepository->findBy(['email' => $_post['email']]);
 
-        $usersRepository = $this->entityManager->getRepository('App\Entity\User');
-
-        $data['users'] = $usersRepository->findAll();
-
+            if (sizeof($usersByEmail) > 0 )
+                throw new \Exception('Email already exists');
 
 
-$errors = array();
-$username = "";
-$email = "";
+            $user = new User();
+            $user->setLogin($_post['username']);
+            $user->setPassword($_post['password']); //TODO: nie trzymamy hasel w plaintext
+            $user->setEmail($_post['email']);
+            $this->entityManager->persist($user);
+            $this->entityManager->flush();
 
-// if user clicks on the sign up button
-if (isset($_POST['signup - btn'])) {
-  $username = $_POST['username'];
-  $email = $_POST['email'];
-  $password = $_POST['password'];
-  $passwordConf = $_POST['passwordConf'];
 
-  // validation
-  if (empty($username)) {
-    $errors['username'] = "Username required";
-  }
-  if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    $errors['email'] = "Email address is invalid";
-  }
-  if (empty($email)) {
-    $errors['email'] = "Email required";
-  }
-  if (empty($password)) {
-    $errors['password'] = "Password required";
-  }
-  if ($passowrd !== $passwordConf) {
-    $errors['password'] = "The two password do not match";
-  }
+        } catch (\Exception $e) {
 
-  $emailQuery = "SELECT * FROM users WHERE email=? LIMIT 1"
-  $stmt = $conn->prepare($emailQuery);
-  $stmt->bind_param('s', $email);
-  $stmt->execute();
-  $result = $stmt->get_result();
-  $userCount = $result->num_rows;
-  $this->entityManager
-$usersRepository = $this->entityManager->getRepository('App\Entity\User');
+            $data['error'] = $e->getMessage();
+            return new HtmlResponse($this->template->render('app::register', $data)); //TODO: naprawic szablon - wyswietlanie bledow w innym miejscu
 
-        $data['users'] = $usersRepository->
+        }
 
 
 
 
+        $data['error'] = "success!";
 
-
-
-  if ($userCount > 0) {
-    $errors['email'] = "Email already exists";
-  }
-
-  if (count($errors) === 0) {
-	 $password = password_hash($password, PASSWORD_DEFAULT);
-	 $token = bin2hex(random_bytes(50));
-	 $verified = false;
-
-	 $sql = "INSERT INTO users (username, mail, verified, token, password) VALUES (?, ?, ?, ?, ?)";
-	 $stmt = $conn->prepare($emailQuery);
-     $stmt->bind_param('ssbss', $username, $email, $verified, $token, $password);
-
-
-     if ($stmt->execute()) {
-        // login user
-        $user_id = $conn->insert_id;
-		$_SESSION['id'] = $user_id;
-		$_SESSION['username'] = $username;
-	    $_SESSION['email'] = $email;
-		$_SESSION['verified'] = $verified;
-		// set flash message
-		$_SESSION['message'] = "You are now logged in!";
-		$_SESSION['alert -class'] = "alert-success";
-
-        exit();
-
-     } else {
-       $errors['db_errors'] = "Database error: failed to register";
-     }
-  }
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        return new HtmlResponse($this->template->render('app::login', $data));
+        return new HtmlResponse($this->template->render('app::register', $data));
     }
 }

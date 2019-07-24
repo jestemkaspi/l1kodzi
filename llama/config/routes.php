@@ -35,5 +35,7 @@ use Zend\Expressive\MiddlewareFactory;
 return function (Application $app, MiddlewareFactory $factory, ContainerInterface $container) : void {
     $app->get('/', App\Handler\HomePageHandler::class, 'home');
     $app->get('/login', App\Handler\LoginHandler::class, 'login');
+    $app->get('/register', App\Handler\RegistrationHandler::class, 'register'); //TODO: napraw mnie
+    $app->post('/register', App\Handler\RegistrationHandler::class, 'register');
     $app->get('/api/ping', App\Handler\PingHandler::class, 'api.ping');
 };

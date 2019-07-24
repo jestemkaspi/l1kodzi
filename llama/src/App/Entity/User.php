@@ -17,11 +17,19 @@ use mysql_xdevapi\Exception;
 class User
 {
 
+    /** @Column(type="datetime") * */
+    protected $registration_date;
+
     /** @Id
      * @Column(type="integer")
      * @GeneratedValue *
      */
     protected $id;
+
+    public function __construct()
+    {
+        $this->registration_date = new \DateTime();
+    }
 
     public function getId()
     {
@@ -69,7 +77,7 @@ class User
     }
 
 
-    /** @Column(type="string") * */
+    /** @Column(type="string", nullable=true) * */
     protected $avatar;
 
     public function getAvatar()
@@ -109,9 +117,6 @@ class User
 
     }
 
-
-    /** @Column(type="datetime") * */
-    protected $registration_date;
 
     public function getRegistration_date()
     {

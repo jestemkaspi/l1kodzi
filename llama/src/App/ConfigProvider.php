@@ -38,6 +38,7 @@ class ConfigProvider
             'factories'  => [
                 Handler\HomePageHandler::class => Handler\HomePageHandlerFactory::class,
                 Handler\LoginHandler::class => Handler\LoginHandlerFactory::class,
+                Handler\RegistrationHandler::class => Handler\RegistrationHandlerFactory::class,
             ],
         ];
     }
