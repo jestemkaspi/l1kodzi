@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping\Id;
 use Doctrine\ORM\Mapping\Table;
+use mysql_xdevapi\Exception;
 
 /**
  * @Entity
@@ -32,11 +33,17 @@ class User
 
     public function getLogin()
     {
+
         return $this->login;
     }
 
     public function setLogin($login)
     {
+        $type_login=gettype($login);
+        if($type_login=! 'string' ){
+            throw new Exception("Type must be string");
+        }
+
         $this->login = $login;
     }
 
@@ -51,6 +58,11 @@ class User
 
     public function setPassword($password)
     {
+        $type_pwd=gettype($password);
+        if($type_pwd=! 'string' ){
+            throw new Exception("Type must be string");
+        }
+
         // hashing, salt ?
         $this->password = $password;
     }
@@ -66,6 +78,11 @@ class User
 
     public function setAvatar($avatar)
     {
+        $type_avatar=gettype();
+        if($type_avatar=! 'string' ){
+            throw new Exception("Type must be string");
+        }
+
         // base_64?
         $this->avatar = $avatar;
     }
