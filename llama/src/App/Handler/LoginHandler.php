@@ -32,7 +32,7 @@ class LoginHandler implements RequestHandlerInterface
     public function __construct(
         string $containerName,
         Router\RouterInterface $router,
-        ?TemplateRendererInterface $template = null,
+        ?TemplateRendererInterface = null,
         EntityManager $entityManager
     ) {
         $this->containerName = $containerName;
