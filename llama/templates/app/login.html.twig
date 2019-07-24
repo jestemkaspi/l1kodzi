@@ -1,28 +1,35 @@
 {% extends '@layout/default.html.twig' %}
 
-{% block title %}Home{% endblock %}
+{% block title %}Log in! Super Llama is waiting...{% endblock %}
 
 {% block content %}
-    <div class="jumbotron">
-        <h1>Welcome to login page</h1>
-    </div>
-
-    <div class="row">
-        <div class="col-md-1">
-<form>
-    <input type="text" />
-    <input type="password" />
-</form>
+        <div class="row">
+            <div class="col-md-8">
+                <h2>Welcome again! Make yourself at home. </br>Llama is waiting.</h2>
+                </br>
+                <form action="<?= $this->url('login') ?>" method="post">
+                    <div class="form-group">
+                        <label for="exampleCheck1">Login</label>
+                        <input class="form-control" type="text" placeholder="Don't be llama and put your nick here.">
+                        <!--<label for="exampleInputEmail1">Email address</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                               placeholder="Enter email">
+                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
+                            else.</small>-->
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Password</label>
+                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                    </div>
+                    <div class="form-group form-check">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                    </div>
+                    <button type="submit" class="btn btn-dark">Submit</button>
+                    <h5></br>Not a member yet? <a href="register.html.twig">Register here!</a></h5>
+                </form>
+            </div>
         </div>
-    </div>
-
     <ul>
-        {% if users is empty %}
-            <li>no users in database</li>
-        {% else %}
-            {% for user in users %}
-                <li>{{ user.login }}</li>
-            {% endfor %}
-        {% endif %}
-    </ul>
+
 {% endblock %}
