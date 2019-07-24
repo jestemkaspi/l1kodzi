@@ -65,4 +65,5 @@ class Ranking
     {
         $this->date = $date;
     }
+
 }
