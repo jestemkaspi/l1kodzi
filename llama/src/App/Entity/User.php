@@ -16,6 +16,7 @@ use mysql_xdevapi\Exception;
  **/
 class User
 {
+
     /** @Id
      * @Column(type="integer")
      * @GeneratedValue *
@@ -39,8 +40,8 @@ class User
 
     public function setLogin($login)
     {
-        $type_login=gettype($login);
-        if($type_login=! 'string' ){
+        $type_login = gettype($login);
+        if ($type_login = !'string') {
             throw new Exception("Type must be string");
         }
 
@@ -58,8 +59,8 @@ class User
 
     public function setPassword($password)
     {
-        $type_pwd=gettype($password);
-        if($type_pwd=! 'string' ){
+        $type_pwd = gettype($password);
+        if ($type_pwd = !'string') {
             throw new Exception("Type must be string");
         }
 
@@ -78,8 +79,8 @@ class User
 
     public function setAvatar($avatar)
     {
-        $type_avatar=gettype();
-        if($type_avatar=! 'string' ){
+        $type_avatar = gettype();
+        if ($type_avatar = !'string') {
             throw new Exception("Type must be string");
         }
 
@@ -99,7 +100,13 @@ class User
     public function setEmail($email)
     {
         // check if there is '@'
-        $this->email = $email;
+
+        if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $this->email = $email;
+        } else {
+            throw new Exception("Use right email adress (with @ and .)");
+        }
+
     }
 
 
